@@ -1,0 +1,45 @@
+<template id="dom-repeat">
+  <slot></slot>
+</template>
+
+
+
+
+<script>
+TT = {};
+customElements.define('dom-repeat', class extends HTMLElement {
+	constructor() {
+		super(); 
+		this.attachTemplate();
+		TT = this;
+		// console.log('created',this);
+	}
+	attachTemplate(){
+	  const template = document.getElementById('dom-repeat').content.cloneNode(true);
+	  this.attachShadow({mode:'open'}).appendChild(template);
+	}
+	connectedCallback() {
+	  var items = JSON.parse(this.getAttribute('items'));
+	  var template = this.innerHTML;
+	  this.innerHTML = '';
+	  console.log('slots',items,template);
+	  for(var i=0; i<items.length; i++)
+	  	this.innerHTML += template.replace('[item]',items[i]);
+    }
+    disconnectedCallback(){
+		console.log('disconnected',this);
+
+    }
+    attributeChangedCallback(attrName, oldVal, newVal) {
+    	console.log('attr',attrName, oldVal, newVal);
+  }
+});
+</script>
+
+
+
+<h1>Dom-repeat</h1>
+
+<dom-repeat items='[5,7,9,11]'>
+	<li>x:[item]</li>
+</dom-repeat>

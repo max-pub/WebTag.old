@@ -1,0 +1,38 @@
+ <script src='BIND.js/ce.js'></script>
+
+<template id='max-tag'>
+  <h2>Default Title</h2>
+  <p>Default Paragraph <b>bold</b></p>
+  <test-tag></test-tag>
+</template>
+
+<template id='test-tag'>
+some random <b>bullshit</b>
+test the nest-ing
+</template>
+
+
+
+<script>
+CustomElements['max-tag'] = class {
+	connectedCallback() {
+		console.log('max-tag working',this);
+	}
+}
+CustomElements['test-tag'] = class {
+	connectedCallback() {
+		console.log('test-tag here',this);
+	}
+}
+</script>
+
+
+
+<style>
+max-tag b { color: orange; }
+test-tag b {color: green;}
+</style>
+
+<body>
+<max-tag></max-tag>
+</body>

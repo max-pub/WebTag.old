@@ -1,0 +1,137 @@
+<script src='BIND.js/BIND.js'></script>
+<script src='BIND.js/DATA.js'></script>
+<script src='BIND.js/VIEW.js'></script>
+<script src='DB.js/DB.js'></script>
+
+<template id="max-tag">
+  <!-- <h3 onclick='event.target.parentNode.host.doit()'>subtitle</h3> -->
+
+  <style>
+    p { color: orange; }
+  </style>
+
+
+  <!-- <slot name="title"><h2>Default Title</h2></slot> -->
+  <!-- <slot name='section'><p>Default Paragraph</p></slot> -->
+  <table>
+  <tr> 
+  <td>
+	  <h2 bind='title'></h2>
+  </td>
+  <td>
+	  <input bind='title'/>
+  </td>
+  </tr>
+  
+  <tr>
+	<td>
+	  <h3 bind='subtitle'></h3>
+	</td>
+	<td>
+	  <input bind='subtitle'/>
+	</td>
+  </tr>
+
+  <tr>
+  <td>
+	  <p bind='text'></p>
+  </td>
+  <td>
+	  <textarea bind='text'></textarea>
+  </td>
+  </tr>
+  
+  <tr>
+  <td>
+	  <progress bind='range' max='100'></progress>
+	  <b bind='range'></b>
+  </td>
+  <td>
+	  <input type='range' bind='range'/>
+	  <input bind='range' style='width: 40px;'/>
+  </td>
+  </tr>
+
+  <tr>
+	<td>
+	  <div id='vis' bind-hidden='vis'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+	</td>
+	<td>
+	  <input type='checkbox' bind='vis'/>hide content
+	</td>
+  </tr>
+  
+  </table>
+
+
+</template>
+
+
+
+
+<script>
+var tt=0;
+customElements.define('max-tag', class extends HTMLElement {
+	constructor() {
+		super(); 
+		this.dom = this;
+		this.attachTemplate('max-tag');
+		tt = this;
+		// this.data = {title:'jo'};
+		// this.binding = new BINDING(this.shadowRoot,this.data);
+		this.data = new BIND(this.shadowRoot, {title:'Data Binding',subtitle:'in less than 1k',range:10,arr:[5,6,{xx:'hallo'}]}).model;
+		// this.data = BIND(this.shadowRoot, {a:1, b:{cc:11},arr:[5,6,{xx:'hallo'}]});
+
+		// this.data.bind('title','.title');
+		// this.data.bind('subtitle','#subtitle');
+		// this.data.bind('subtitle','.subtitle'); 
+		// this.data.bind('important','#imp');
+		// this.data.bind('range','#progress');
+		// this.data.bind('range','#slider');
+		// event('click',function(){},'.title');
+
+		// this.data.bind('query','#search');
+		// console.log('created',this);
+
+	}
+	attachTemplate(id){
+	  this.attachShadow({mode:'open'}).appendChild(document.getElementById(id).content.cloneNode(true));
+	}
+	connectedCallback() {
+		console.log('connected',this);
+		// this.shadowRoot.getElementById('subtitle').addEventListener('click',this.doit);
+		this.addEventListener('click',function(){
+			// console.log('yeah',this.shadowRoot)
+			// this.hidden = true;
+		}.bind(this));
+    }
+    disconnectedCallback(){
+		console.log('disconnected',this);
+
+    }
+    doit(){
+    	console.log('doin it');
+    }
+});
+
+
+class c1{
+	f(x){
+		console.log('c1:x',x);
+	}
+}
+
+
+</script>
+
+
+
+<!-- <p>another paragraph</p> -->
+
+<!-- <max-tag>
+	<h2 slot='title'>my title</h2>
+</max-tag>
+
+<hr/>
+ -->
+<max-tag></max-tag>

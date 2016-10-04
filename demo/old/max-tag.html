@@ -1,0 +1,19 @@
+
+<template>
+  <slot name="title"><h2>Default Title</h2></slot>
+  <slot name='section'><p>Default Paragraph</p></slot>
+</template>
+
+
+
+<script>
+connectedCallback() {
+	console.log('max-tag working',this);
+}
+</script>
+
+
+
+<style>
+p { color: orange; }
+</style>

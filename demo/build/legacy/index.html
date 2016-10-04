@@ -1,0 +1,46 @@
+
+<title>tag-demo</title>
+
+<template id="tag-one">
+
+  <h2>Title</h2>
+  <p> Lorem ipsum dolor sit amet, <b>consetetur</b> sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur <b>sadipscing</b> elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+ 
+  <tag-two></tag-two>
+
+</template>
+
+
+<template id="tag-two">
+
+	two2
+	<tag-three></tag-three> 
+
+</template>
+
+
+<template id="tag-three">
+
+	three2
+
+</template>
+
+
+<template id="tag-four">
+
+	four4
+	<template id="loop" loop="list">loop it</template>  
+
+</template>
+
+
+<script src="index.js"></script>
+<link rel="stylesheet" type="text/css" href="index.css">
+
+
+
+
+<body>
+	<tag-one></tag-one>
+
+</body>
