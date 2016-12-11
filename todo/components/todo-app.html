@@ -1,0 +1,73 @@
+<!-- <script src='//lib.max.pub/DB.js'></script> -->
+<!-- <script src='//lib.max.pub/GLUE.js'></script> -->
+<!-- <script src='//lib.max.pub/EVENTS.js'></script> -->
+<!-- <script src='../GLUE.js/ObjectObserver.js'></script>
+<script src='../BIND.js/DATA.js'></script>
+<script src='../BIND.js/GLUE.js'></script>
+ -->
+<script src='../GLUE.js/GLUE.js'></script>
+<script src='../GLUE.js/ObjectObserver.js'></script>
+<script src='../GLUE.js/DOMObserver.js'></script>
+<script src='../GLUE.js/Node.js'></script>
+
+
+
+<template>
+	<input value='[[title]]'/>
+	<button on-click='addTodo'>add</button>
+
+	<i>[[todos.0.title]]</i>
+	<ul>
+		<template loop='todos' as='item'>
+			<li>
+				<b class='[[item.active]]'>[[item.title]]</b>
+				<i on-click='removeTodo'>x</i>
+			</li>
+		</template>
+	</ul>
+
+	<b>[[title]]</b> 
+</template>
+
+ 
+
+       
+
+<script>    
+	connectedCallback(){
+		this.oo = new ObjectObserver({title:'test',todos:[]}); 
+		new GLUE(this.DOM, this.oo);
+		// new EVENTS(this.DOM, this);
+   	}
+   	addTodo(){
+   		return; 
+   		this.oo.data.todos.push({title:this.data.title});
+   		this.data.title = '';
+   	}
+</script>
+
+
+
+<style>
+	
+</style>
+
+
+
+
+
+<!-- <template>
+	<form db-store='todo'>
+		<input name='title'/>
+		<input type='hidden' name='active' value='true'/>
+		<button type='submit'>add</button>
+	</form>
+
+	<ul>
+		<template db-list='todo' as='item' filter="{active:true}">
+			<li bind='item.title'></li>
+		</template>
+	</ul>
+</template>
+
+ -->

@@ -1,0 +1,32 @@
+
+<head>
+	<title>Todo-App</title>
+	<template id="todo-app">
+
+	<input value="[[title]]">
+	<button on-click="addTodo">add</button>
+
+	<i>[[todos.0.title]]</i>
+	<ul>
+		<template loop="todos" as="item">
+			<li>
+				<b class="[[item.active]]">[[item.title]]</b>
+				<i on-click="removeTodo">x</i>
+			</li>
+		</template>
+	</ul>
+
+	<b>[[title]]</b> 
+
+</template>
+
+
+<script src="index.js"></script>
+<link rel="stylesheet" type="text/css" href="index.css">
+
+</head>
+
+<body>
+	<todo-app></todo-app>
+</body>
+

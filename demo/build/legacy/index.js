@@ -1,14 +1,6 @@
 'use strict';
 var CustomElements = {};
 document.addEventListener('DOMContentLoaded', function() {
-	new MutationObserver(function(mutations) {
-		for (var i = 0; i < mutations.length; i++) {
-			addTags(mutations[i].target)
-		}
-	}).observe(document.body, {
-		childList: true,
-		subtree: true
-	});
 	var addTags = function addTags(root) { // console.log('add Tags to', root);
 		var todo = [];
 		var templates = document.querySelectorAll('template');
@@ -29,6 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			if ('connectedCallback' in ce) ce.connectedCallback()
 		}
 	};
+	new MutationObserver(function(mutations) {
+		for (var i = 0; i < mutations.length; i++) {
+			addTags(mutations[i].target)
+		}
+	}).observe(document.body, {
+		childList: true,
+		subtree: true
+	});
 	addTags(document.body)
 });
 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 CustomElements['tag-one'] = class {
 
 	connectedCallback() {
-		console.log('tag-one working',this);
+		console.log('tag-one working', this);
 	}
 
 }

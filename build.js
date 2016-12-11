@@ -11,9 +11,8 @@ class Builder {
 	constructor(root = 'index.html') {
 		this.tags = {};
 		this.scripts = {};
+
 		this.parseFiles(root);
-		this.index = this.tags['index.html'];
-		delete this.tags['index.html'];
 		this.compile();
 		this.addScripts();
 		this.createIndex();
@@ -43,6 +42,10 @@ class Builder {
 			this.scripts[script] = fs.readFileSync(script, 'utf-8');
 			$(el).remove();
 		});
+		if (filename == 'index.html') {
+			this.index = this.tags['index.html'];
+			delete this.tags['index.html'];
+		}
 	}
 
 
@@ -99,8 +102,8 @@ let build = new Builder('index.html');
 // return;
 
 var watch = Object.keys(build.tags).concat(Object.keys(build.scripts));
-
 console.log('watch', watch);
+
 fs.watch(".", {
 	recursive: true
 }, (event, filename) => {
